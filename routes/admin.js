@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 router.get('/', (req, res) => {
-    res.send('pagina de adm')
+    res.render("admin/index")
 })
 
 router.get('/post', (req, res) => {
@@ -11,4 +11,5 @@ router.get('/post', (req, res) => {
 router.get('/categorias', (req, res) => {
     res.send('Pagina de categorias')
 })
+
 module.exports = router
