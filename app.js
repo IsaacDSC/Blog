@@ -4,7 +4,7 @@ const handlebars = require('express-handlebars')
 const bodyParser = require('body-parser')
 const app = express()
 const path = require('path')
-    //const mongoose = require('mogoose')
+const mongoose = require('mongoose')
 
 //adionando Rotas
 const admin = require('./routes/admin')
@@ -21,8 +21,15 @@ app.set('view engine', 'handlebars')
 app.use(express.static(path.join(__dirname, 'public')))
 
 //configurando mongose
-
-//Rotas
+mongoose.Promise = global.Promise
+mongoose.connect('mongodb://localhost/blogapp', {
+        useNewUrlParser: true
+    }).then(() => {
+        console.log('connect in MongoDB')
+    }).catch((err) => {
+        console.log('Problem in connect mongodb : ' + err)
+    })
+    //Rotas
 app.use('/admin', admin)
 
 const PORT = 3000
