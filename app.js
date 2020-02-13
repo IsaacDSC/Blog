@@ -23,13 +23,20 @@ app.use(express.static(path.join(__dirname, 'public')))
 //configurando mongose
 mongoose.Promise = global.Promise
 mongoose.connect('mongodb://localhost/blogapp', {
-        useNewUrlParser: true
-    }).then(() => {
-        console.log('connect in MongoDB')
-    }).catch((err) => {
-        console.log('Problem in connect mongodb : ' + err)
-    })
-    //Rotas
+    useunifiedTopology: true
+}).then(() => {
+    console.log('conectado com sucesso ao mongoDB')
+}).catch((erro) => {
+    console.log('erro ao se conectar ao Mongo: ' + erro)
+})
+
+//criando midleware
+app.use((req, res, next) => {
+    console.log('MIDDLEWARE ATIVATE!')
+    next();
+})
+
+//Rotas
 app.use('/admin', admin)
 
 const PORT = 3000
