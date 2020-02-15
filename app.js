@@ -5,11 +5,20 @@ const bodyParser = require('body-parser')
 const app = express()
 const path = require('path')
 const mongoose = require('mongoose')
+const session = require('express-session')
+const flahs = require('connect-flash')
 
 //adionando Rotas
 const admin = require('./routes/admin')
 
-//configurando body-parser
+//configuração da sessao
+app.use(session({
+        secret: "cursodenode",
+        resave: true,
+        saveUninitialized: true
+    }))
+    //config flash
+    //configurando body-parser
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 

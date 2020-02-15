@@ -3,6 +3,8 @@ Blog da aula de NodeJs
     
     //install of dependence's
     #express
-    #handlebars
+    #express-handlebars
     #body-parser
     #mongose
+    #express-session
+    #connect-flash
