@@ -6,18 +6,28 @@ const app = express()
 const path = require('path')
 const mongoose = require('mongoose')
 const session = require('express-session')
-const flahs = require('connect-flash')
+const flash = require('connect-flash')
 
 //adionando Rotas
 const admin = require('./routes/admin')
 
 //configuração da sessao
 app.use(session({
-        secret: "cursodenode",
-        resave: true,
-        saveUninitialized: true
-    }))
-    //config flash
+    secret: "cursodenode",
+    resave: true,
+    saveUninitialized: true
+}))
+
+//config flash
+app.use(flash())
+
+//criando midleware
+app.use((req, res, next) => {
+        // console.log('MIDDLEWARE ATIVATE!')
+        res.locals.success_msg = req.flash('success_msg')
+        res.locals.error_msg = req.flash('error_msg')
+        next()
+    })
     //configurando body-parser
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -37,12 +47,6 @@ mongoose.connect('mongodb://localhost/blogapp', {
     console.log('conectado com sucesso ao mongoDB')
 }).catch((erro) => {
     console.log('erro ao se conectar ao Mongo: ' + erro)
-})
-
-//criando midleware
-app.use((req, res, next) => {
-    console.log('MIDDLEWARE ATIVATE!')
-    next();
 })
 
 //Rotas
