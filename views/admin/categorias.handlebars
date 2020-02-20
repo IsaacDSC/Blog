@@ -9,6 +9,11 @@
         <small>{{this.slug}}</small>
         <br>
         <small>Data de categorias:{{this.date}}</small>
+        <ul>
+            <a href="/admin/categorias/edit/{{_id}}"><button class="btn btn-success mt-3">Editar</button></a>
+            <a href=""><button class="btn btn-danger mt-3">Apagar</button></a>
+        </ul>
+
     </div>
 </div>
 {{/each}}
