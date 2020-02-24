@@ -11,9 +11,15 @@
         <small>Data de categorias:{{this.date}}</small>
         <ul>
             <a href="/admin/categorias/edit/{{_id}}"><button class="btn btn-success mt-3">Editar</button></a>
-            <a href=""><button class="btn btn-danger mt-3">Apagar</button></a>
+            <form action="/admin/categorias/delete" method="post">
+                <input type="hidden" name="id" value="{{_id}}">
+                <a href="/admin/categorias/delete"><button class="btn btn-danger mt-3">Apagar</button></a>
+            </form>
         </ul>
 
     </div>
 </div>
+{{else}}
+<!-- Se nao houver categoria vai mostrar a seguinte msg -->
+<h4 class="mt-3">Nenhuma Categoria Registrada</h4>
 {{/each}}
